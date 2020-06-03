@@ -1,0 +1,11 @@
+#!/bin/sh
+
+for i in *.md; do
+    [ -f "$i" ] || break
+    file=${i%".md"}
+    pandoc -V geometry:margin=.5in --variable=fontfamily:arev -o $file.PDF $file.md
+done
+
+pdfunite *.PDF Rezept.pdf
+
+rm *.PDF
